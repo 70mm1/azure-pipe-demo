@@ -1,21 +1,34 @@
-pool:
-  vmImage: 'ubuntu-latest'
+# Publish GitHub Pages
+# azure-pipelines.yml
 
 trigger:
 - master
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 steps:
-- checkout: self
-  persistCredentials: true
-
-- task: NodeTool@0
-  inputs:
-    versionSpec: '8.x'
-  displayName: 'Install Node.js'
-
 - script: |
-    git config user.email "mail@tmirwald.de" 
-    git config user.name "Tom Mirwald"
     npm install
     npm run deploy -- -r https://$(github_pat)@github.com/70mm1/azure-pipe-demo.git
-  displayName: 'npm install and build'
+    git config --local user.name "mail@tmirwald.de"
+    git config --local user.email "Tom Mirwald"
+    git add .
+    git commit -m "Publishing GitHub Pages  ***NO_CI***"
+  displayName: 'Build and commit pages'
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: deploy_key
+  displayName: 'Get the deploy key'
+
+- script: |
+    mkdir ~/.ssh && mv $DOWNLOADSECUREFILE_SECUREFILEPATH ~/.ssh/id_rsa
+    chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+    git remote set-url --push origin git@github.com:vtbassmatt/vtbassmatt.github.io.git
+    git push origin HEAD:master
+  displayName: 'Publish GitHub Pages'
+  condition: |
+    and(not(eq(variables['Build.Reason'], 'PullRequest')),
+        eq(variables['Build.SourceBranch'], 'refs/heads/master'))
