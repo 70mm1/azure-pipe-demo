@@ -26,6 +26,6 @@ steps:
     mkdir ~/.ssh && mv $DOWNLOADSECUREFILE_SECUREFILEPATH ~/.ssh/id_rsa
     chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_rsa
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-    git remote set-url --push origin git@github.com:70mm1/70mm1.github.io/azure-pipe-demo/
+    git remote set-url --push origin git@github.com:70mm1/azure-pipe-demo.git
     git push origin HEAD:master
   displayName: 'Publish GitHub Pages'
