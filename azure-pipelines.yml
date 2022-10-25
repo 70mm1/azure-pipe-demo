@@ -10,7 +10,7 @@ pool:
 steps:
 - script: |
     npm install
-    npm run deploy -- -r https://$(github_pat)@github.com/70mm1/azure-pipe-demo.git
+    npm build
     git config --local user.name "mail@tmirwald.de"
     git config --local user.email "Tom Mirwald"
     git add .
@@ -29,6 +29,3 @@ steps:
     git remote set-url --push origin git@github.com:70mm1/70mm1.github.io/azure-pipe-demo/
     git push origin HEAD:master
   displayName: 'Publish GitHub Pages'
-  condition: |
-    and(not(eq(variables['Build.Reason'], 'PullRequest')),
-        eq(variables['Build.SourceBranch'], 'refs/heads/master'))
