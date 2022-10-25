@@ -5,18 +5,18 @@ trigger:
 - master
 
 steps:
-- checkout: self
-  persistCredentials: true
-
 - task: NodeTool@0
   inputs:
-    versionSpec: '8.x'
+    versionSpec: '10.x'
   displayName: 'Install Node.js'
 
 - script: |
-    git config user.email "mail@tmirwald.de" 
-    git config user.name "Tom Mirwald"
+    git config --global user.email "mail@tmirwald.de" 
+    git config --global user.name "Tom Mirwald"
     npm install
     npm run build
-    npm run deploy -- -r https://$(github_pat)@github.com/70mm1/azure-pipe-demo.git
+    npx gh-pages --repo https://$(DEPLOY_TOKEN)@github.com/70mm1/azure-pipe-demo.git
   displayName: 'npm install and build'
+ 
+
+  
