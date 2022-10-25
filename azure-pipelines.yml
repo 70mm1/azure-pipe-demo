@@ -2,7 +2,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 trigger:
-- source
+- master
 
 steps:
 - checkout: self
