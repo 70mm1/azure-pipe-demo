@@ -16,15 +16,15 @@ steps:
   - task: DownloadSecureFile@1
     name: mySecureFile
     inputs:
-      secureFile: ""
+      secureFile: "6312da48-b03b-4854-9e77-443c51702218"
       retryCount: "2"
 
   - task: InstallSSHKey@0
     inputs:
       knownHostsEntry: ""
-      sshPublicKey: ""
+      sshPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGpXW7NIpEgwacaez6gvMO4Z8wZw4trVmeuGvHMYSOyW mail@tmirwald.de"
       sshPassphrase: "$(PUBLISHPASS)"
-      sshKeySecureFile: ""
+      sshKeySecureFile: "6312da48-b03b-4854-9e77-443c51702218"
 
   - script: |
       git config --global --add url."git@github.com:".insteadOf "https://github.com/"
