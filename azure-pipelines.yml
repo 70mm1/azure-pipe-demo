@@ -17,5 +17,6 @@ steps:
     git config user.email "mail@tmirwald.de" 
     git config user.name "Tom Mirwald"
     npm install
+    npm install react-scripts
     npm run deploy -- -r https://$(github_pat)@github.com/70mm1/azure-pipe-demo.git
   displayName: 'npm install and build'
