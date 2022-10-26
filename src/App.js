@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Asteroid Bang Bang Bang.
+          DAT Asteroid Bang Bang.
         </p>
         <a
           className="App-link"
